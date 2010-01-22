@@ -1,6 +1,6 @@
 <?php
 /* 
-	RSS to Twitter using PHP.
+	RSS to Twitter using PHP 5.
 	By: Colin Devroe
 	http://cdevroe.com/
 	
@@ -8,12 +8,14 @@
 	
 	Written on December 6, 2009 while watching
 	Star Trek III: The Search for Spock.
+	
+	Version 0.2 - January 22, 2010
 
 */
 
-$wpUrl = 'http://cdevroe.com/';
-$categoryToTwitter = 'Mobile photos';
-$cacheDir = "/path/to/cachedir";
+$wpUrl = 'URL'; // e.g. http://cdevroe.com/
+$categoryToTwitter = 'CATEGORY'; // e.g. 'Mobile photos'
+$cacheDir = "/path/to/cachedir/"; // e.g. /home/.eastwood/domain.com/directory/'
 $twitter = array('username' => 'USERNAME', 'password' => 'PASSWORD');
 
 // Retrieve and parse RSS feed
