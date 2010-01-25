@@ -6,15 +6,15 @@
 	
 	http://github.com/cdevroe
 	
-	Written on December 6, 2009 while watching
+	Originally written on December 6, 2009 while watching
 	Star Trek III: The Search for Spock.
 	
-	Version 0.2 - January 22, 2010
+	Version 0.3 - January 24, 2010
 
 */
 
 $wpUrl = 'URL'; // e.g. http://cdevroe.com/
-$categoryToTwitter = 'CATEGORY'; // e.g. 'Mobile photos'
+$categoryToTwitter = ''; // e.g. 'Mobile photos' (see Readme for more)
 $cacheDir = "/path/to/cachedir/"; // e.g. /home/.eastwood/domain.com/directory/'
 $twitter = array('username' => 'USERNAME', 'password' => 'PASSWORD');
 
@@ -43,9 +43,12 @@ foreach ($parsedXml->channel->item as $post) {
 		a. The link has never been tweeted.
 		b. The post is less than (timeout) hours old.
 		c. The category is (categoryToTwitter) */
-	if (in_array($shortUrl, $cached) === false && ($date == NULL || $date > time() - (60 * 60 * $timeout)) && $post->category[0] == $categoryToTwitter) {
+	if (in_array($shortUrl, $cached) === false && ($date == NULL || $date > time() - (60 * 60 * $timeout))) {
+	
+	// If a category is provide, it will check for it.
+	if ($categoryToTwitter == '' || $post->category[0] == $categoryToTwitter) {
 		
-		$twitterMessage = rtrim($post->category[0], "s").' "'.$post->title.'": '.$shortUrl;
+		$twitterMessage = $post->category[0].' "'.$post->title.'": '.$shortUrl;
 		
 		$curl = curl_init("http://twitter.com/statuses/update.xml?status=". urlencode($twitterMessage));
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -62,6 +65,7 @@ foreach ($parsedXml->channel->item as $post) {
 		} else {
 			echo '<p>Tried to Twitter: '.$twitterMessage.' - Error status: '.$status;
 		}
+	} // End if categoryToTwitter
 
 	} // end if (post to twitter)
 } // end foreach
