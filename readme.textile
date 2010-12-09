@@ -4,6 +4,10 @@ h1. RSS to Twitter using PHP.
 http://cdevroe.com/
 http://github.com/cdevroe
 
+h2. Notice!
+
+p. This script no longer works for Twitter's API since they now force the use of OAuth. I will be updating this script to use OAuth in the future unless someone else would like to contribute that change.
+
 h2. Description:
 
 p. Grabs an RSS feed and updates a Twitter account with a link to any new post based on a specific category in Wordpress.
@@ -19,10 +23,15 @@ h2. Installation:
 
 p. That's it!
 
+h2. License:
+
+p. RSS to Twitter is released under the GPL License. This license is provided in license.txt.
+
 h2. To do:
 
 p. (If anyone would like to take these on, please feel free.)
 
+# OAuth Support
 # Optimize the code and caching.
 # Make caching optional
 # Add support for posts attributed to multiple categories
