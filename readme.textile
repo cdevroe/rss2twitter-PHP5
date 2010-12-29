@@ -1,43 +1,49 @@
-h1. RSS to Twitter using PHP.
+h1. RSS to Twitter using PHP 5
 
 *By:* Colin Devroe
 http://cdevroe.com/
 http://github.com/cdevroe
-
-h2. Notice!
-
-p. This script no longer works for Twitter's API since they now force the use of OAuth. I will be updating this script to use OAuth in the future unless someone else would like to contribute that change.
+https://github.com/cdevroe/rss2twitter-PHP5
 
 h2. Description:
 
-p. Grabs an RSS feed and updates a Twitter account with a link to any new post based on a specific category in Wordpress.
+p. Grabs an RSS feed and updates a single Twitter account with a link to any new post.
 
 h2. Installation:
 
-# Edit $feedUrl
-# Edit $categoryToTwitter (e.g. 'Mobile photos' or '' for all)
-# Edit $cachedir (must be writable)
-# Edit $twitter with user/pass
-# Copy to server.
+# Register your app at: http://dev.twitter.com/apps/new (Be sure to set it up as Read & Write!)
+# Update the Setup area of rss2twitter.php
+## This includes consumerKey,consumerToken,oAuthToken,oAuthTokenSecret from dev.twitter, RSS feed URL, and Cache directory (optional)
+# Authorize your domain for the application on dev.twitter
+## To setup a test you can always add localhost
+# Make the /cache/ directory writable or change its location
+# Copy to your server.
 # Set up cron job. Example: /usr/local/php5/bin/php   /path/to/script/rss2twitter.php
 
 p. That's it!
 
-h2. License:
+h2. Licensing:
 
-p. RSS to Twitter is released under the GPL License. This license is provided in license.txt.
+p. RSS to Twitter is released under the GPL License. This license is provided in license.txt. The Twitter class by Tijs Verkoyen is released under the BSD License and that is included in twitter.php
 
 h2. To do:
 
 p. (If anyone would like to take these on, please feel free.)
 
-# OAuth Support
-# Optimize the code and caching.
-# Make caching optional
-# Add support for posts attributed to multiple categories
+# Add an option to easily update the tweet syntax.
 
 
 h2. Version History:
+
+*2.0 - December 29, 2010
+- Now uses OAuth for authentication
+- Removed option to tweet only a single blog category
+- Added Twitter class by Tijs Verkoyen http://classes.verkoyen.eu/
+- Improved caching
+- Updated Readme.textile
+
+*1.0 - December 29, 2010
+- Tagged and branched for future revision
 
 *0.4 - January 25, 2010*
 - Changed wpUrl to feedUrl
