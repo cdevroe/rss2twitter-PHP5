@@ -49,7 +49,7 @@ function construct_message($post) {
 	$message = str_replace("%DESCRIPTION%", $post->description, $message);
 
 	// Shorten the String if longer than 140 chars incl. 23 char t.co link
-	if (strlen(str_replace("%LINK%","xxxxxxxxxxxxxxx",$message)) > 116) {
+	if (strlen($message) > 116) {
 		$message = substr($message, 0, 113).'...';
 	}
 
