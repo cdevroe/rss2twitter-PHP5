@@ -32,9 +32,32 @@ $cacheDir = "cache/"; // e.g. /home/.eastwood/domain.com/directory/' Leave blank
 // Error reporting level
 error_reporting(E_NOTICE); // You may change this for debugging purposes if you'd like.
 
+// Tweet Message format (link is automatically appended)
+$tweet_format = '%CATEGORY% "%TITLE%"';
+
 /* End Setup */
 
 
+// Build the tweet based on the given tweet format
+function construct_message($post) {
+	global $tweet_format;
+	$message = $tweet_format;
+
+	// Replace all variables
+	$message = str_replace("%CATEGORY%", $post->category[0], $message);
+	$message = str_replace("%TITLE%", $post->title, $message);
+	$message = str_replace("%DESCRIPTION%", $post->description, $message);
+
+	// Shorten the String if longer than 140 chars incl. 23 char t.co link
+	if (strlen(str_replace("%LINK%","xxxxxxxxxxxxxxx",$message)) > 116) {
+		$message = substr($message, 0, 113).'...';
+	}
+
+	// Append link
+	$message = $message.': '.$post->link;
+
+	return $message;
+}
 
 
 // Retrieve and parse RSS feed
@@ -67,7 +90,7 @@ foreach ($parsedXml->channel->item as $post) {
 	if (in_array($post->link, $cached) === false && ($date == NULL || $date > time() - (60 * 60 * $timeout))) {
 			
 		// Construct message
-		$tweet = $post->category[0].' "'.$post->title.'": '.$post->link;
+		$tweet = construct_message($post);
 		
 		// Send tweet to Twitter
 		$sendTweet = $rss2twitter->statusesUpdate($tweet);
